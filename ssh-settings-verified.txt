@@ -1,0 +1,7 @@
+# These are the effective SSH settings recorded with `sudo sshd -T` on the Ubuntu VM.
+# This is NOT a complete copy of /etc/ssh/sshd_config.
+# Recorded after Task 1 and verified restored after Task 2 testing.
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication no
+kbdinteractiveauthentication no

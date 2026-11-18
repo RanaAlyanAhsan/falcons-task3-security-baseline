@@ -1,0 +1,6 @@
+# Rule entered through sudo visudo -f /etc/sudoers.d/falconadmin
+# Transcribed from Task 1 notes, not a copied system configuration file.
+falconadmin ALL=(root) /usr/sbin/ufw status, /usr/sbin/ufw status verbose
+
+# Verification: sudo visudo -c -> parsed OK
+# sudo -l -U falconadmin -> permitted UFW status commands only
