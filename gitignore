@@ -1,0 +1,9 @@
+# Do not upload keys, local environment files or Python cache
+*.pem
+*.key
+*.ppk
+falcons_ed25519
+falcons_ed25519.pub
+.env
+__pycache__/
+*.pyc
