@@ -1,0 +1,377 @@
+alyan@falcons-server:~/Desktop$ cd ..
+alyan@falcons-server:~$ sudo apt update
+[sudo] password for alyan: 
+Hit:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:2 http://pk.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://pk.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://pk.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+464 packages can be upgraded. Run 'apt list --upgradable' to see them.
+alyan@falcons-server:~$ sudo apt install -y openssh-server ufw
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ufw is already the newest version (0.36.1-4ubuntu0.1).
+ufw set to manually installed.
+The following additional packages will be installed:
+  ncurses-term openssh-client openssh-sftp-server ssh-import-id
+Suggested packages:
+  keychain libpam-ssh monkeysphere ssh-askpass molly-guard
+
+The following NEW packages will be installed:
+  ncurses-term openssh-server openssh-sftp-server ssh-import-id
+The following packages will be upgraded:
+  openssh-client
+1 upgraded, 4 newly installed, 0 to remove and 463 not upgraded.
+Need to get 752 kB/1,657 kB of archives.
+After this operation, 6,061 kB of additional disk space will be used.
+Get:1 http://pk.archive.ubuntu.com/ubuntu jammy-updates/main amd64 openssh-sftp-server amd64 1:8.9p1-3ubuntu0.18 [38.9 kB]
+Get:2 http://pk.archive.ubuntu.com/ubuntu jammy-updates/main amd64 openssh-server amd64 1:8.9p1-3ubuntu0.18 [436 kB]
+Get:3 http://pk.archive.ubuntu.com/ubuntu jammy-updates/main amd64 ncurses-term all 6.3-2ubuntu0.3 [268 kB]
+Get:4 http://pk.archive.ubuntu.com/ubuntu jammy/main amd64 ssh-import-id all 5.11-0ubuntu1 [10.1 kB]
+Fetched 752 kB in 2s (340 kB/s)          
+Preconfiguring packages ...
+(Reading database ... 207881 files and directories currently installed.)
+Preparing to unpack .../openssh-client_1%3a8.9p1-3ubuntu0.18_amd64.deb ...
+Unpacking openssh-client (1:8.9p1-3ubuntu0.18) over (1:8.9p1-3ubuntu0.10) ...
+Selecting previously unselected package openssh-sftp-server.
+Preparing to unpack .../openssh-sftp-server_1%3a8.9p1-3ubuntu0.18_amd64.deb ...
+Unpacking openssh-sftp-server (1:8.9p1-3ubuntu0.18) ...
+Selecting previously unselected package openssh-server.
+Preparing to unpack .../openssh-server_1%3a8.9p1-3ubuntu0.18_amd64.deb ...
+Unpacking openssh-server (1:8.9p1-3ubuntu0.18) ...
+Selecting previously unselected package ncurses-term.
+Preparing to unpack .../ncurses-term_6.3-2ubuntu0.3_all.deb ...
+Unpacking ncurses-term (6.3-2ubuntu0.3) ...
+Selecting previously unselected package ssh-import-id.
+Preparing to unpack .../ssh-import-id_5.11-0ubuntu1_all.deb ...
+Unpacking ssh-import-id (5.11-0ubuntu1) ...
+Setting up openssh-client (1:8.9p1-3ubuntu0.18) ...
+Setting up ssh-import-id (5.11-0ubuntu1) ...
+Setting up ncurses-term (6.3-2ubuntu0.3) ...
+Setting up openssh-sftp-server (1:8.9p1-3ubuntu0.18) ...
+Setting up openssh-server (1:8.9p1-3ubuntu0.18) ...
+
+Creating config file /etc/ssh/sshd_config with new version
+Creating SSH2 RSA key; this may take some time ...
+3072 SHA256:FdQJcPRrLLBfvVww4xDThI/1giUbjTkKWLBDKCeaa/s root@falcons-server (RSA
+)
+Creating SSH2 ECDSA key; this may take some time ...
+256 SHA256:T3T9OLQkXMYHLCnQCQ1ViV7eQE5vt7lWokBmRBaxyHE root@falcons-server (ECDS
+A)
+Creating SSH2 ED25519 key; this may take some time ...
+256 SHA256:nFnBWopfg546XTrRUEx4tqFG3o0HJnFoNJI8lGmxJeI root@falcons-server (ED25
+519)
+Created symlink /etc/systemd/system/sshd.service → /lib/systemd/system/ssh.servi
+ce.
+Created symlink /etc/systemd/system/multi-user.target.wants/ssh.service → /lib/s
+ystemd/system/ssh.service.
+rescue-ssh.target is a disabled or a static unit, not starting it.
+ssh.socket is a disabled or a static unit, not starting it.
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for ufw (0.36.1-4ubuntu0.1) ...
+alyan@falcons-server:~$ sudo systemctl enable --now ssh
+Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable ssh
+alyan@falcons-server:~$ sudo systemctl status ssh
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: e>
+     Active: active (running) since Sat 2026-11-14 22:03:04 PKT; 19s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 3135 (sshd)
+      Tasks: 1 (limit: 4606)
+     Memory: 1.7M
+        CPU: 24ms
+     CGroup: /system.slice/ssh.service
+             └─3135 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+نومبر 14 22:03:04 falcons-server systemd[1]: Starting OpenBSD Secure Shell serv>
+نومبر 14 22:03:04 falcons-server sshd[3135]: Server listening on 0.0.0.0 port 2>
+نومبر 14 22:03:04 falcons-server sshd[3135]: Server listening on :: port 22.
+نومبر 14 22:03:04 falcons-server systemd[1]: Started OpenBSD Secure Shell serve>
+lines 1-16/16 (END)...skipping...
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2026-11-14 22:03:04 PKT; 19s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 3135 (sshd)
+      Tasks: 1 (limit: 4606)
+     Memory: 1.7M
+        CPU: 24ms
+     CGroup: /system.slice/ssh.service
+             └─3135 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+نومبر 14 22:03:04 falcons-server systemd[1]: Starting OpenBSD Secure Shell server...
+نومبر 14 22:03:04 falcons-server sshd[3135]: Server listening on 0.0.0.0 port 22.
+نومبر 14 22:03:04 falcons-server sshd[3135]: Server listening on :: port 22.
+نومبر 14 22:03:04 falcons-server systemd[1]: Started OpenBSD Secure Shell server.
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-16/16 (END)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2026-11-14 22:03:04 PKT; 19s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 3135 (sshd)
+      Tasks: 1 (limit: 4606)
+     Memory: 1.7M
+        CPU: 24ms
+     CGroup: /system.slice/ssh.service
+             └─3135 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+نومبر 14 22:03:04 falcons-server systemd[1]: Starting OpenBSD Secure Shell server...
+نومبر 14 22:03:04 falcons-server sshd[3135]: Server listening on 0.0.0.0 port 22.
+نومبر 14 22:03:04 falcons-server sshd[3135]: Server listening on :: port 22.
+نومبر 14 22:03:04 falcons-server systemd[1]: Started OpenBSD Secure Shell server.
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-16/16 (END)
+[1]+  Stopped                 sudo systemctl status ssh
+alyan@falcons-server:~$ sudo systemctl status ssh
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2026-11-14 22:03:04 PKT; 43s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 3135 (sshd)
+      Tasks: 1 (limit: 4606)
+     Memory: 1.7M
+        CPU: 24ms
+     CGroup: /system.slice/ssh.service
+             └─3135 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+نومبر 14 22:03:04 falcons-server systemd[1]: Starting OpenBSD Secure Shell server...
+نومبر 14 22:03:04 falcons-server sshd[3135]: Server listening on 0.0.0.0 port 22.
+نومبر 14 22:03:04 falcons-server sshd[3135]: Server listening on :: port 22.
+نومبر 14 22:03:04 falcons-server systemd[1]: Started OpenBSD Secure Shell server.
+alyan@falcons-server:~$ ssh -V
+sudo ufw version
+OpenSSH_8.9p1 Ubuntu-3ubuntu0.18, OpenSSL 3.0.2 15 Mar 2022
+ufw 0.36.1
+Copyright 2008-2021 Canonical Ltd.
+alyan@falcons-server:~$ sudo adduser falconadmin
+Adding user `falconadmin' ...
+Adding new group `falconadmin' (1001) ...
+Adding new user `falconadmin' (1001) with group `falconadmin' ...
+Creating home directory `/home/falconadmin' ...
+Copying files from `/etc/skel' ...
+New password: 
+BAD PASSWORD: The password contains the user name in some form
+Retype new password: 
+Sorry, passwords do not match.
+New password: 
+BAD PASSWORD: The password fails the dictionary check - it is too simplistic/systematic
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for falconadmin
+Enter the new value, or press ENTER for the default
+	Full Name []: Falcon Admin
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] y
+alyan@falcons-server:~$ id falconadmin
+uid=1001(falconadmin) gid=1001(falconadmin) groups=1001(falconadmin)
+alyan@falcons-server:~$ getent passwd falconadmin
+falconadmin:x:1001:1001:Falcon Admin,,,:/home/falconadmin:/bin/bash
+alyan@falcons-server:~$ id falconadmin
+uid=1001(falconadmin) gid=1001(falconadmin) groups=1001(falconadmin)
+alyan@falcons-server:~$ command -v ufw
+/usr/sbin/ufw
+alyan@falcons-server:~$ sudo visudo -f /etc/sudoers.d/falconadmin
+alyan@falcons-server:~$ sudo visudo -c
+/etc/sudoers: parsed OK
+/etc/sudoers.d/README: parsed OK
+/etc/sudoers.d/falconadmin: parsed OK
+alyan@falcons-server:~$ sudo -l -U falconadmin
+Matching Defaults entries for falconadmin on falcons-server:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User falconadmin may run the following commands on falcons-server:
+    (root) /usr/sbin/ufw status, /usr/sbin/ufw status verbose
+alyan@falcons-server:~$ sudo systemctl is-active ssh
+active
+alyan@falcons-server:~$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+[sudo] password for alyan: 
+alyan@falcons-server:~$ sudo nano /etc/ssh/sshd_config
+alyan@falcons-server:~$ sudo sshd -t
+alyan@falcons-server:~$ sudo sshd -T | grep -E '^(permitrootlogin|passwordauthentication|kbdinteractiveauthentication|pubkeyauthentication) '
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication no
+kbdinteractiveauthentication no
+alyan@falcons-server:~$ sudo systemctl restart ssh
+alyan@falcons-server:~$ sudo systemctl is-active ssh
+active
+alyan@falcons-server:~$ ssh -p 2222 -i "$env:USERPROFILE\.ssh\falcons_ed25519" -o IdentitiesOnly=yes -o PreferredAuthentications=publickey -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no falconadmin@127.0.0.1 whoami
+Warning: Identity file :USERPROFILE\.ssh\falcons_ed25519 not accessible: No such file or directory.
+ssh: connect to host 127.0.0.1 port 2222: Connection refused
+alyan@falcons-server:~$ sudo passwd -S root
+root L 11/14/2026 0 99999 7 -1
+alyan@falcons-server:~$ sudo ufw default deny incoming
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+alyan@falcons-server:~$ sudo ufw default allow outgoing
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+alyan@falcons-server:~$ sudo ufw allow 22/tcp
+Rules updated
+Rules updated (v6)
+alyan@falcons-server:~$ sudo ufw allow 80/tcp
+Rules updated
+Rules updated (v6)
+alyan@falcons-server:~$ sudo ufw show added
+Added user rules (see 'ufw status' for running firewall):
+ufw allow 22/tcp
+ufw allow 80/tcp
+alyan@falcons-server:~$ sudo ufw enable
+Firewall is active and enabled on system startup
+alyan@falcons-server:~$ sudo ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere                  
+80/tcp                     ALLOW IN    Anywhere                  
+22/tcp (v6)                ALLOW IN    Anywhere (v6)             
+80/tcp (v6)                ALLOW IN    Anywhere (v6)             
+
+alyan@falcons-server:~$ ^C
+alyan@falcons-server:~$ ssh -p 2222 -i "$env:USERPROFILE\.ssh\falcons_ed25519" -o IdentitiesOnly=yes -o PasswordAuthentication=no falconadmin@127.0.0.1 whoami
+Warning: Identity file :USERPROFILE\.ssh\falcons_ed25519 not accessible: No such file or directory.
+ssh: connect to host 127.0.0.1 port 2222: Connection refused
+alyan@falcons-server:~$ 
+
